@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quyosh Tizimi</title>
+    <style>
+        /* Umumiy sozlamalar va fon */
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000;
+            /* Fon uchun yulduzlar effekti */
+           background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                              radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                              radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px); 
+            
+            background-size: 500px 500px, 300px 300px, 200px 200px;
+            background-position: 0 0, 100px 60px, 300px 100px;
+        }
+
+        /* Quyosh tizimi konteyneri */
+        .solar-system {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Quyosh stili */
+        .sun {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            
+            /* Quyosh rasmi. O'zingizning rasm yo'lingizni kiriting */
+            background-image: url('image/sun.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            box-shadow: 0 0 30px, 0 0 60px, 0 0 90px;
+            z-index: 10;
+            animation: sun-rotation 30s linear infinite;
+        }
+
+        @keyframes sun-rotation {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* Sayyoralar orbitasi uchun umumiy stil */
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: orbit-rotation linear infinite;
+            transform-origin: center center; /* Bu muhim! */
+        }
+
+        /* Har bir sayyoraning orbitasi o'lchamlari va tezligi */
+        .mercury-orbit { width: 100px; height: 100px; animation-duration: 8s; }
+        .venus-orbit   { width: 140px; height: 140px; animation-duration: 15s; }
+        .earth-orbit   { width: 180px; height: 180px; animation-duration: 25s; }
+        .mars-orbit    { width: 220px; height: 220px; animation-duration: 35s; }
+        .jupiter-orbit { width: 300px; height: 300px; animation-duration: 60s; }
+        .saturn-orbit  { width: 380px; height: 380px; animation-duration: 85s; }
+        .uranus-orbit  { width: 460px; height: 460px; animation-duration: 110s; }
+        .neptune-orbit { width: 540px; height: 540px; animation-duration: 140s; }
+
+        /* Orbit aylanish animatsiyasi */
+        @keyframes orbit-rotation {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* Sayyoralar uchun umumiy stil */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+        }
+
+
+        /* Har bir sayyoraning o'ziga xos o'lchami va rasmi */
+        /* Rasm yo'llarini o'zingizning fayl tuzilishingizga qarab o'zgartiring */
+        .mercury { width: 8px; height: 8px; background-image: url('image/mercury.png'); }
+        .venus   { width: 12px; height: 12px; background-image:url('image/venus.png'); }
+        .earth   { width: 14px; height: 14px; background-image: url('image/earth.png'); position: relative; }
+        .mars    { width: 10px; height: 10px; background-image: url('image/mars.png'); }
+        .jupiter { width: 28px; height: 28px; background-image: url('image/jupiter.png'); }
+        .saturn  { width: 24px; height: 24px; background-image: url('image/saturn.png'); }
+        .uranus  { width: 20px; height: 20px; background-image: url('image/uranus.png'); }
+        .neptune { width: 20px; height: 20px; background-image: url('image/neptune.png'); }
+
+        /* Saturn halqasi stili */
+        .saturn .ring {
+            position: absolute;
+            width: 32px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            z-index: -1;
+        }
+
+        /* Oy orbitasi */
+        .moon-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border: 1px dotted rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: moon-orbit-rotation 5s linear infinite;
+        }
+
+        /* Oy stili */
+        .moon {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: silver;
+            border-radius: 50%;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Oy orbitasi aylanish animatsiyasi uchun @keyframes */
+        @keyframes moon-orbit-rotation {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to   { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="solar-system">
+        <div class="sun"></div>
+        <div class="orbit mercury-orbit">
+            <div class="planet mercury"></div>
+        </div>
+        <div class="orbit venus-orbit">
+            <div class="planet venus"></div>
+        </div>
+        <div class="orbit earth-orbit">
+            <div class="planet earth">
+                <div class="moon-orbit">
+                    <div class="moon"></div>
+                </div>
+            </div>
+        </div>
+        <div class="orbit mars-orbit">
+            <div class="planet mars"></div>
+        </div>
+        <div class="orbit jupiter-orbit">
+            <div class="planet jupiter"></div>
+        </div>
+        <div class="orbit saturn-orbit">
+            <div class="planet saturn">
+                <div class="ring"></div>
+            </div>
+        </div>
+        <div class="orbit uranus-orbit">
+            <div class="planet uranus"></div>
+        </div>
+        <div class="orbit neptune-orbit">
+            <div class="planet neptune"></div>
+        </div>
+    </div>
+
+  <script src="script.js"></script>
+
+  
+    
+</body>
+</html>
